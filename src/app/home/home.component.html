@@ -1,0 +1,83 @@
+<div class="foods">
+    <div class="search-box">
+      <label for="food-search">Search</label>
+      <input id="food-search" type="text" [(ngModel)]="pattern">
+    </div>
+  
+    <div class="new-food">
+      <button (click)="enableUserToAddFood()" class="new-food-button">Add New Fish</button>
+      <br>
+      <div id="input" *ngIf="isEditing">
+        <div>
+            <br> <br>
+          <label for="new-food-name">Name</label>
+          <input type="text" [(ngModel)]="newFoodName">
+          <br> <br>
+        </div>
+        <div>
+          <label for="new-food-amount">amount</label>
+          <input type="text" [(ngModel)]="newFoodamount">
+          <br> <br>
+        </div>
+        <div>
+          <label for="new-food-name">Image</label>
+          <input type="text" [(ngModel)]="newFoodImage">
+          <br> <br>
+        </div>
+  
+        <button (click)="newFood()">Add Fish</button>
+      </div>
+    </div>
+  
+    <ul class="food-list">
+      <li class="single-food" *ngIf="isEditing">
+        <img [src]="newFoodImage">
+        <h3 class="food-name">
+          {{ newFoodName }}
+          <small class="food-amount">{{ newFoodamount }}</small>
+        </h3>
+      </li>
+  
+  
+  
+      <li class="single-food" *ngFor="let food of foods | foodSearch:'name':pattern;">
+        <img [src]="food.image">
+        <h3 class="food-name">
+          {{ food.name }}
+        </h3>
+        <h3 class="food-amount">RS . {{ food.amount }}</h3>
+  
+        <input type="number" #quantity value="1">
+        <button (click)="addToMyList(food, quantity)"> Add </button>
+      </li>
+    </ul>
+  
+  </div>
+  
+  
+  
+  <div id="menu" class="my-food-list" style="visibility: hidden;">
+    <div id="pdfTable" #pdfTable>
+    <h2>XYZ Fish Invoice</h2>
+    <table class="table table-bordered">
+      <tr class="table-primary">
+        <th>Item</th>
+        <th>Amount</th>
+        <th>Quantity</th>
+      </tr>
+      <tr *ngFor="let food of myList">
+        <td>{{food.name}}</td>
+        <td>{{food.amount}}</td>
+        <td>{{food.quantity}}</td>
+      </tr>
+      <tr>
+        <th>Total</th>
+        <td>-</td>
+        <td>Rs. {{totalamount}}</td>
+      </tr>
+    </table>
+  </div >
+  <div id="btn"> <button  (click)="downloadAsPDF()">Bill</button>
+  </div>
+  </div>
+  

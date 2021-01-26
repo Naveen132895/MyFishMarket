@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "fishmaket"
+    }
+  },
+  "defaultProject": "fishmaket",
+  "cli": {
+    "analytics": "4f911136-8ff9-4b5b-81f3-70148dfce7a7"
+  }
 }
