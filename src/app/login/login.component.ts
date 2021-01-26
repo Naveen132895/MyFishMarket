@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { Router } from '@angular/router';
 import { Router, CanActivate } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +13,10 @@ export class LoginComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   state=1;
+  count=0
  email:string
  password:string
-  constructor(private formBuilder: FormBuilder,private router: Router) { }
+  constructor(private formBuilder: FormBuilder,private router: Router,private toastr: ToastrService) { }
   data =
   [
   {
@@ -46,7 +47,10 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.registerForm.invalid) {
+      this.toastr.warning('Email and Password is required',"Hey !!",{timeOut: 2000});;
+
       return;
+
     }
     this.email=this.registerForm.value.email
     this.password=this.registerForm.value.password
@@ -56,15 +60,22 @@ export class LoginComponent implements OnInit {
     this.data.forEach((e)=>{
       if(e.email==this.email && e.password==this.password)
       {
-        // this.router.navigate(['/home']);
         this.state=0;
-         this.router.navigate(['/home']);
+        this.toastr.success('Login Successful',"Hey !!",{timeOut: 2000});;
+        this.router.navigate(['/home']);
+    
         }
+        this.count++;
+       console.log(this.count)
        
        
     })
     this.registerForm.reset();
-
+    if(this.count==3 &&this.state==1 ){
+      this.toastr.error('Invaild Email & Password', "Hey !!", {
+        timeOut: 3000
+      });
+    }
   }
 
   onReset() {

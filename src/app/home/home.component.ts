@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
 import foodsList from '../foods';
 import { Router, CanActivate } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import * as jsPDF from 'jspdf'
 @Component({
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit {
   quantity       : number;
   totalamount  : number = 0;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private toastr: ToastrService) {}
 
   ngOnInit() {
     this.foods = foodsList;
@@ -79,6 +80,8 @@ export class HomeComponent implements OnInit {
     });
 
     doc.save('xyzinvoice.pdf');
+    this.toastr.success('Check your Invoice',"Thank You For Order",{timeOut: 5000});;
+
     this.router.navigate(['/login']);
 
   }
