@@ -106,4 +106,30 @@
   #btn{
     margin: 5%;
     margin-left:40% ;
+    display: inline;
+
+  }
+  #btn1{
+    margin: 5%;
+    margin-left:20% ;
+    display: inline;
+    padding: 5px 22px;
+
+  }
+.address{
+position: absolute;
+background-color: #9e4d0b;
+width: 30%;
+ margin-top: -70%;
+ margin-left: 35%;
+ padding: 1%;
+  }
+ input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
   }

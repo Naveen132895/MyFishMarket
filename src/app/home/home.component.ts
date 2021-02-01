@@ -12,15 +12,22 @@ import * as jsPDF from 'jspdf'
 export class HomeComponent implements OnInit {
 
   foods          : Object[];
+  user          : Object[];
+
   myList         : {name: string, amount: number, quantity: number, image: string}[] = [];
+  userdetails    : {name: string, phone: number, email: string, address: string}[] = [];
   pattern        : string;
   isEditing      : boolean = false;
   newFoodName    : string = "Example Name";
-  newFoodamount: number = 250;
+  newFoodamount  : number = 250;
   newFoodImage   : string = "https://pngimg.com/uploads/goldfish/goldfish_PNG88.png";
   quantity       : number;
-  totalamount  : number = 0;
-
+  totalamount    : number = 0;
+  name           : string;
+  phone          : number;
+  email          : string; 
+  address        : string;
+  type           : boolean = false;
   constructor(private router: Router,private toastr: ToastrService) {}
 
   ngOnInit() {
@@ -86,5 +93,25 @@ export class HomeComponent implements OnInit {
 
   }
 
+  userdata(){
+    document.getElementById('address').style.visibility='visible'
 
+    const userdata = {
+      name  : this.name,
+      phone : this.phone,
+      email : this.email,
+      address: this.address
+    }
+    this.user.unshift(userdata);
+    this.isEditing = true;
+    this.name = "";
+    this.phone = null
+    this.email = "";
+    this.address = "";
+
+  }
+  addmore(){
+    document.getElementById('address').style.visibility='hidden'
+
+  }
 }
